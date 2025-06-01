@@ -3,22 +3,20 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 const storage = getStorage();
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("gestione-area").style.display = "none";
-});
-
+// Funzione per il controllo della password
 function checkPassword() {
-    const passwordInput = document.getElementById("password").value;
-    
-    if (passwordInput.trim() === "171073") {
+    const passwordInput = document.getElementById("password").value.trim(); // Elimina spazi extra
+
+    if (passwordInput === "171073") {
         document.getElementById("gestione-area").style.display = "block";
         document.getElementById("password").style.display = "none"; 
-        document.querySelector("button").style.display = "none"; 
+        document.getElementById("password-btn").style.display = "none"; 
     } else {
         alert("❌ Password errata! Riprova.");
     }
 }
 
+// Evento per l'inserimento del mezzo
 document.getElementById("mezzo-form").addEventListener("submit", async (event) => {
     event.preventDefault();
 
