@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mezzi Usati</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Mezzi Usati</h1>
-    <div class="buttons">
-        <a href="consultazione.html" class="btn">Consultazione</a>
-        <a href="gestione.html" class="btn">Gestione</a>
+<div id="gestione-area" style="display: none;">
+    <h2>Aggiungi nuovo mezzo</h2>
+    <form id="mezzo-form">
+        <!-- Campi per aggiungere il mezzo -->
+    </form>
+
+    <!-- 🟢 Sezione Eliminazione Mezzo - Ora nascosta all'avvio -->
+    <div id="elimina-mezzo" style="display: none;">
+        <h2>Elimina Mezzo</h2>
+        <label for="codice_elimina">Inserisci codice FB:</label>
+        <input type="text" id="codice_elimina" placeholder="Es. FB-0001" required>
+        <button onclick="eliminaMezzo()">Elimina Mezzo</button>
     </div>
-</body>
-</html>
+</div>
