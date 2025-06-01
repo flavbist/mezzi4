@@ -1,11 +1,11 @@
 /* Stile generale */
 body {
     font-family: "Poppins", sans-serif;
-    background-color: #f8f9fa;
+    background-color: #dcdcdc; /* 🟢 Sfondo grigio elegante */
     color: #333;
     text-align: center;
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 /* Titoli */
@@ -18,6 +18,10 @@ h1 {
 /* Bottoni */
 .buttons {
     margin-top: 40px;
+    display: flex;
+    flex-direction: column; /* 🟢 Posiziona i pulsanti uno sotto l'altro */
+    align-items: center; 
+    gap: 15px; /* 🟢 Distanza tra i pulsanti */
 }
 
 .btn {
