@@ -46,9 +46,13 @@ document.getElementById("mezzo-form").addEventListener("submit", async (event) =
         };
 
         await addDoc(collection(db, "mezzi"), nuovoMezzo);
-        
-        alert("✅ Mezzo aggiunto con successo!");
-        document.getElementById("mezzo-form").reset(); // Pulisce il modulo di inserimento
+
+        // 🟢 Messaggio di conferma ben visibile
+        alert("✅ Mezzo aggiunto con successo! Il modulo verrà svuotato.");
+
+        // 🟢 Svuota i campi del modulo
+        document.getElementById("mezzo-form").reset();
+        fileInput.value = ""; // Svuota selezione file
 
     } catch (error) {
         console.error("Errore durante l'aggiunta:", error);
