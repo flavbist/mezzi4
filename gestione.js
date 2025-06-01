@@ -4,17 +4,19 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 const storage = getStorage();
 
 // Funzione per il controllo della password
-function checkPassword() {
-    const passwordInput = document.getElementById("password").value.trim(); // Elimina spazi extra
+window.checkPassword = function () {
+    const passwordInput = document.getElementById("password").value.trim();
 
     if (passwordInput === "171073") {
+        console.log("✅ Password corretta! Sblocco gestione.");
         document.getElementById("gestione-area").style.display = "block";
         document.getElementById("password").style.display = "none"; 
         document.getElementById("password-btn").style.display = "none"; 
     } else {
+        console.log("❌ Password errata!");
         alert("❌ Password errata! Riprova.");
     }
-}
+};
 
 // Evento per l'inserimento del mezzo
 document.getElementById("mezzo-form").addEventListener("submit", async (event) => {
@@ -44,5 +46,3 @@ document.getElementById("mezzo-form").addEventListener("submit", async (event) =
     alert("✅ Mezzo aggiunto con successo!");
     document.getElementById("mezzo-form").reset();
 });
-
-window.checkPassword = checkPassword;
