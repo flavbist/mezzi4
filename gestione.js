@@ -8,7 +8,7 @@ function checkPassword() {
     if (passwordInput === "171073") {
         document.getElementById("gestione-area").style.display = "block";
     } else {
-        alert("Password errata!");
+        alert("❌ Password errata!");
     }
 }
 
@@ -45,10 +45,13 @@ document.getElementById("mezzo-form").addEventListener("submit", async (event) =
         };
 
         await addDoc(collection(db, "mezzi"), nuovoMezzo);
+        
         alert("✅ Mezzo aggiunto con successo!");
-        document.getElementById("mezzo-form").reset();
+        document.getElementById("mezzo-form").reset(); // Pulisce il modulo di inserimento
+
     } catch (error) {
         console.error("Errore durante l'aggiunta:", error);
+        alert("❌ Errore durante l'aggiunta del mezzo. Riprova.");
     }
 });
 
@@ -58,11 +61,4 @@ async function eliminaMezzo() {
     try {
         const mezzoRef = doc(db, "mezzi", codiceMezzo);
         await deleteDoc(mezzoRef);
-        alert("✅ Mezzo eliminato con successo!");
-    } catch (error) {
-        console.error("Errore durante l'eliminazione:", error);
-    }
-}
-
-window.checkPassword = checkPassword;
-window.eliminaMezzo = eliminaMezzo;
+        alert("✅ Mezzo elimin
