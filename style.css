@@ -16,13 +16,29 @@ h1 {
 }
 
 /* Bottoni */
-.buttons {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column; /* 🟢 Posiziona i pulsanti uno sotto l'altro */
-    align-items: center; 
-    gap: 35px; /* 🟢 Distanza tra i pulsanti */
+.btn, button {
+    display: inline-block;
+    width: 200px; /* 🟢 Stessa larghezza per tutti */
+    height: 50px; /* 🟢 Stessa altezza per tutti */
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, #0099ff, #007acc);
+    border-radius: 8px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
 }
+
+.btn:hover, button:hover {
+    background: linear-gradient(135deg, #007acc, #0056b3);
+    transform: scale(1.05);
+}
+
 
 .btn {
     display: inline-block;
