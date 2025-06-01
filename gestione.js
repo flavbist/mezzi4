@@ -7,8 +7,9 @@ function checkPassword() {
     const passwordInput = document.getElementById("password").value;
     if (passwordInput === "171073") {
         document.getElementById("gestione-area").style.display = "block";
+        document.getElementById("password").style.display = "none"; // Nasconde il campo password
     } else {
-        alert("❌ Password errata!");
+        alert("❌ Password errata! Riprova.");
     }
 }
 
@@ -61,4 +62,12 @@ async function eliminaMezzo() {
     try {
         const mezzoRef = doc(db, "mezzi", codiceMezzo);
         await deleteDoc(mezzoRef);
-        alert("✅ Mezzo elimin
+        alert("✅ Mezzo eliminato con successo!");
+    } catch (error) {
+        console.error("Errore durante l'eliminazione:", error);
+        alert("❌ Errore durante l'eliminazione del mezzo.");
+    }
+}
+
+window.checkPassword = checkPassword;
+window.eliminaMezzo = eliminaMezzo;
