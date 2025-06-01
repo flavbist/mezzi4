@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Mezzi</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="gestione.js"></script>
+</head>
+<body>
+    <h1>Gestione Mezzi</h1>
+    <label for="password">Inserisci password:</label>
+    <input type="password" id="password">
+    <button onclick="checkPassword()">Accedi</button>
+    <div id="gestione-area" style="display: none;">
+        <h2>Aggiungi nuovo mezzo</h2>
+        <form id="mezzo-form">
+            <input type="text" id="nome_mezzo" placeholder="Nome mezzo" required>
+            <input type="number" id="anno_prima_immatricolazione" placeholder="Anno prima immatricolazione" required>
+            <input type="text" id="attrezzatura" placeholder="Attrezzatura">
+            <input type="number" id="anno_attrezzatura" placeholder="Anno attrezzatura">
+            <input type="number" id="km_percorsi" placeholder="KM percorsi">
+            <textarea id="note_varie" placeholder="Note"></textarea>
+            <input type="number" id="prezzo" placeholder="Prezzo" required>
+            <button type="submit">Aggiungi Mezzo</button>
+        </form>
+        <h2>Elimina Mezzo</h2>
+        <input type="text" id="mezzo_codice" placeholder="Codice alfanumerico (es. FB-0001)">
+        <button onclick="eliminaMezzo()">Elimina Mezzo</button>
+    </div>
+    <a href="index.html" class="btn">Torna Indietro</a>
+</body>
+</html>
