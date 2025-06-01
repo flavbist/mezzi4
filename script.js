@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         const snapshot = await getDocs(mezziCollection);
+        
         if (snapshot.empty) {
             mezziList.innerHTML = "<p>⚠️ Nessun mezzo disponibile. Aggiungine uno dalla sezione Gestione.</p>";
             return;
@@ -27,8 +28,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
             mezziList.appendChild(div);
         });
+
     } catch (error) {
-        console.error("Errore nel recupero dei dati:", error);
-        mezziList.innerHTML = "<p>⚠️ Errore nel caricamento dei mezzi. Riprova più tardi.</p>";
+        console.error("❌ Errore nel recupero dei dati:", error);
+        mezziList.innerHTML = "<p>⚠️ Errore nel caricamento dei mezzi. Controlla la connessione con Firebase.</p>";
     }
 });
