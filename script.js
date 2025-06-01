@@ -1,3 +1,5 @@
+import { db, collection, getDocs } from "./firebase.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
     const mezziList = document.getElementById("mezzi-list");
     const mezziCollection = collection(db, "mezzi");
@@ -19,6 +21,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p><strong>KM percorsi:</strong> ${data.km_percorsi}</p>
                 <p><strong>Note:</strong> ${data.note_varie}</p>
                 <p><strong>Prezzo:</strong> €${data.prezzo}</p>
+                <div class="foto-mezzo">
+                    ${data.foto ? data.foto.map(url => `<img src="${url}" alt="Foto mezzo">`).join('') : '<p>🖼 Nessuna foto disponibile</p>'}
+                </div>
             `;
             mezziList.appendChild(div);
         });
