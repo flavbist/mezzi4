@@ -10,6 +10,7 @@ window.checkPassword = function () {
     if (passwordInput === "171073") {
         console.log("✅ Password corretta! Sblocco gestione.");
         document.getElementById("gestione-area").style.display = "block";
+        document.getElementById("elimina-mezzo").style.display = "block"; // 🟢 Ora anche il tasto eliminazione viene mostrato
         document.getElementById("password").style.display = "none";
         document.getElementById("password-btn").style.display = "none";
     } else {
@@ -17,6 +18,7 @@ window.checkPassword = function () {
         alert("❌ Password errata! Riprova.");
     }
 };
+
 
 // 🟢 Sblocca il modulo gestione solo se il DOM è pronto
 document.addEventListener("DOMContentLoaded", () => {
