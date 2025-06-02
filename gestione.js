@@ -3,11 +3,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 const storage = getStorage();
 
-/**
- * Funzione globale per la password (necessario con type="module")
- * DEVE essere assegnata così per funzionare con onclick="checkPassword()" nell'HTML!
- */
-window.checkPassword = function () {
+// Funzione per il controllo password (non serve globale, usiamo event listener)
+function checkPassword() {
     const passwordInput = document.getElementById("password").value.trim();
     if (passwordInput === "1710") {
         document.getElementById("gestione-area").style.display = "block";
@@ -15,9 +12,13 @@ window.checkPassword = function () {
     } else {
         alert("❌ Password errata! Riprova.");
     }
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // Collega il pulsante della password
+    const passwordBtn = document.getElementById("password-btn");
+    if (passwordBtn) passwordBtn.addEventListener("click", checkPassword);
 
     // GESTIONE INSERIMENTO NUOVO MEZZO
     const mezzoForm = document.getElementById("mezzo-form");
