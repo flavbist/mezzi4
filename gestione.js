@@ -3,7 +3,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 const storage = getStorage();
 
-// Funzione per il controllo password (non serve globale, usiamo event listener)
+// Funzione per il controllo password
 function checkPassword() {
     const passwordInput = document.getElementById("password").value.trim();
     if (passwordInput === "1710") {
@@ -16,7 +16,7 @@ function checkPassword() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Collega il pulsante della password
+    // Collega il pulsante della password senza usare onclick nell'HTML
     const passwordBtn = document.getElementById("password-btn");
     if (passwordBtn) passwordBtn.addEventListener("click", checkPassword);
 
