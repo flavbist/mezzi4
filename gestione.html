@@ -77,32 +77,31 @@
         </form>
         <div id="elimina-result" style="margin-top:12px;"></div>
       </div>
-    </div>
-      <!-- Modifica Mezzo -->
-<hr>
-<h3>Modifica Mezzo</h3>
-<input type="text" id="codice_modifica" placeholder="Codice FB">
-<button id="cerca-modifica-btn">Modifica Mezzo</button>
 
-<form id="modifica-form" style="display:none; margin-top:1em;">
-    <!-- Campi come nel form inserimento -->
-    <label>Nome mezzo: <input type="text" id="mod_nome_mezzo"></label><br>
-    <label>Anno prima immatricolazione: <input type="number" id="mod_anno_prima_immatricolazione"></label><br>
-    <label>Targa: <input type="text" id="mod_targa"></label><br>
-    <label>Attrezzatura: <input type="text" id="mod_attrezzatura"></label><br>
-    <label>Anno attrezzatura: <input type="number" id="mod_anno_attrezzatura"></label><br>
-    <label>Km percorsi: <input type="number" id="mod_km_percorsi"></label><br>
-    <label>Note varie: <input type="text" id="mod_note_varie"></label><br>
-    <label>Prezzo: <input type="number" id="mod_prezzo" step="0.01"></label><br>
-    <label>Scadenza assicurazione: <input type="date" id="mod_scadenza_assicurazione"></label><br>
-    <label>Scadenza revisione: <input type="date" id="mod_scadenza_revisione"></label><br>
-    <!-- Non gestisco qui nuove foto per semplicità -->
-    <button type="submit">Salva Modifiche</button>
-</form>
-<div id="modifica-result"></div>
+      <!-- SEZIONE MODIFICA MEZZO (SOTTO ELIMINA) -->
+      <hr>
+      <h3>Modifica Mezzo</h3>
+      <input type="text" id="codice_modifica" placeholder="Codice FB">
+      <button id="cerca-modifica-btn">Modifica Mezzo</button>
+      <form id="modifica-form" style="display:none; margin-top:1em;">
+          <label>Nome mezzo: <input type="text" id="mod_nome_mezzo"></label><br>
+          <label>Anno prima immatricolazione: <input type="number" id="mod_anno_prima_immatricolazione"></label><br>
+          <label>Targa: <input type="text" id="mod_targa"></label><br>
+          <label>Attrezzatura: <input type="text" id="mod_attrezzatura"></label><br>
+          <label>Anno attrezzatura: <input type="number" id="mod_anno_attrezzatura"></label><br>
+          <label>Km percorsi: <input type="number" id="mod_km_percorsi"></label><br>
+          <label>Note varie: <input type="text" id="mod_note_varie"></label><br>
+          <label>Prezzo: <input type="number" id="mod_prezzo" step="0.01"></label><br>
+          <label>Scadenza assicurazione: <input type="date" id="mod_scadenza_assicurazione"></label><br>
+          <label>Scadenza revisione: <input type="date" id="mod_scadenza_revisione"></label><br>
+          <!-- Non gestisco qui nuove foto per semplicità -->
+          <button type="submit">Salva Modifiche</button>
+      </form>
+      <div id="modifica-result"></div>
 
-    <div class="center" style="margin-top:32px;">
-      <a href="index.html" class="btn">Torna Indietro</a>
+      <div class="center" style="margin-top:32px;">
+        <a href="index.html" class="btn">Torna Indietro</a>
+      </div>
     </div>
   </div>
   <script type="module" src="gestione.js"></script>
