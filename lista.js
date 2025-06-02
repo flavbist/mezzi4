@@ -12,39 +12,31 @@ async function caricaMezzi() {
             return;
         }
 
-        let html = `<table>
-            <thead>
-                <tr>
-                    <th>Codice</th>
-                    <th>Nome</th>
-                    <th>Anno</th>
-                    <th>Attr.</th>
-                    <th>Prezzo</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-        `;
-
-        querySnapshot.forEach((docSnap) => {
+        let html = "<ul style='list-style:none;padding:0;'>";
+        querySnapshot.forEach(docSnap => {
             const mezzo = docSnap.data();
-            html += `<tr>
-                <td>${mezzo.codice_fb || ''}</td>
-                <td>${mezzo.nome_mezzo || ''}</td>
-                <td>${mezzo.anno_prima_immatricolazione || ''}</td>
-                <td>${mezzo.targa || ''}</td>
-                <td>${mezzo.attrezzatura || ''}</td>
-                <td>${mezzo.anno_attrezzatura || ''}</td>
-                <td>${mezzo.km_percorsi || ''}</td>
-                <td>${mezzo.note_varie || ''}</td>
-                <td>${mezzo.prezzo ? '€' + mezzo.prezzo.toLocaleString('it-IT') : ''}</td>
-                <td>
-                  <a class="btn" href="consultazione.html?id=${docSnap.id}" style="padding:5px 12px;font-size:0.95em;">Apri</a>
-                </td>
-            </tr>`;
+            html += `
+            <li style="margin-bottom:24px; padding:14px 8px; border-bottom:1px solid #e0e0e0;">
+                <div style="font-weight:bold; font-size:1.2em; color:#1976d2;">
+                  ${mezzo.codice_fb || "(senza codice)"}
+                </div>
+                <div>
+                  ${mezzo.nome_mezzo ? `<div><strong>Nome:</strong> ${mezzo.nome_mezzo}</div>` : ""}
+                  ${mezzo.anno_prima_immatricolazione ? `<div><strong>Anno immatricolazione:</strong> ${mezzo.anno_prima_immatricolazione}</div>` : ""}
+                  ${mezzo.targa ? `<div><strong>Targa:</strong> ${mezzo.targa}</div>` : ""}
+                  ${mezzo.attrezzatura ? `<div><strong>Attrezzatura:</strong> ${mezzo.attrezzatura}</div>` : ""}
+                  ${mezzo.anno_attrezzatura ? `<div><strong>Anno attrezzatura:</strong> ${mezzo.anno_attrezzatura}</div>` : ""}
+                  ${mezzo.km_percorsi ? `<div><strong>Km percorsi:</strong> ${mezzo.km_percorsi}</div>` : ""}
+                  ${mezzo.note_varie ? `<div><strong>Note:</strong> ${mezzo.note_varie}</div>` : ""}
+                  ${mezzo.prezzo ? `<div><strong>Prezzo:</strong> €${mezzo.prezzo.toLocaleString('it-IT')}</div>` : ""}
+                  <div style="margin-top:8px;">
+                    <a class="btn" href="consultazione.html?id=${docSnap.id}" style="padding:5px 12px;font-size:0.95em;">Apri</a>
+                  </div>
+                </div>
+            </li>
+            `;
         });
-
-        html += `</tbody></table>`;
+        html += "</ul>";
         listaDiv.innerHTML = html;
     } catch (err) {
         listaDiv.innerHTML = `<div style='color:#d32f2f;text-align:center;'>Errore caricamento dati:<br>${err.message}</div>`;
