@@ -1,6 +1,6 @@
-import { db, doc, getDoc } from "./firebase.js";
+import { db, doc, getDoc, collection, getDocs, query, where } from "./firebase.js";
 
-function getMezzoIdFromUrl() {
+function getMezzoIdentifierFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
@@ -12,27 +12,39 @@ function mostraCodiceMezzo(codice) {
 }
 
 async function mostraSchedaMezzo() {
-    const mezzoId = getMezzoIdFromUrl();
+    const identifier = getMezzoIdentifierFromUrl();
     const schedaDiv = document.getElementById("scheda-mezzo");
 
-    if (!mezzoId) {
+    if (!identifier) {
         mostraCodiceMezzo("");
-        schedaDiv.innerHTML = "<div style='text-align:center;color:#d32f2f;font-weight:bold;'>ID mezzo non specificato nell'URL.<br>Devi aprire la pagina come <code>consultazione.html?id=IDMEZZO</code></div>";
+        schedaDiv.innerHTML = "<div style='text-align:center;color:#d32f2f;font-weight:bold;'>ID o codice mezzo non specificato nell'URL.<br>Devi aprire la pagina come <code>consultazione.html?id=IDMEZZO</code> oppure <code>consultazione.html?id=FB.00003</code></div>";
         return;
     }
 
-    try {
-        const docRef = doc(db, "mezzi", mezzoId);
-        const docSnap = await getDoc(docRef);
+    let docSnap = null;
 
-        if (!docSnap.exists()) {
+    try {
+        // Se sembra un ID Firestore (lungo e senza punti)
+        if (/^[a-zA-Z0-9]{15,}$/.test(identifier)) {
+            const docRef = doc(db, "mezzi", identifier);
+            docSnap = await getDoc(docRef);
+            if (!docSnap.exists()) docSnap = null;
+        }
+
+        // Se non trovato, cerca per codice_fb
+        if (!docSnap) {
+            const q = query(collection(db, "mezzi"), where("codice_fb", "==", identifier));
+            const qSnap = await getDocs(q);
+            if (!qSnap.empty) docSnap = qSnap.docs[0];
+        }
+
+        if (!docSnap) {
             mostraCodiceMezzo("");
             schedaDiv.innerHTML = "<div style='text-align:center;color:#d32f2f;font-weight:bold;'>Mezzo non trovato!</div>";
             return;
         }
 
         const mezzo = docSnap.data();
-
         mostraCodiceMezzo(mezzo.codice_fb);
 
         schedaDiv.innerHTML = `
