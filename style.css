@@ -1,113 +1,121 @@
-/* 🟢 Impostazioni generali */
 body {
-    font-family: "Poppins", sans-serif;
-    background-color: #f4f7fc; /* 🟢 Grigio chiaro sofisticato */
-    color: #333;
-    text-align: center;
+    min-height: 100vh;
     margin: 0;
-    padding: 20px;
-}
-
-/* 🟢 Container principale */
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    background: #ffffff;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-}
-
-/* 🟢 Titoli */
-h1, h2 {
-    font-size: 28px;
-    color: #007acc;
-    margin-bottom: 20px;
-}
-
-/* 🟢 Bottoni */
-button, .btn {
-    display: inline-block;
-    width: 220px;
-    height: 55px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    background: linear-gradient(135deg, #0099ff, #007acc);
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-button:hover, .btn:hover {
-    background: linear-gradient(135deg, #007acc, #0056b3);
-    transform: scale(1.05);
-}
-
-/* 🟢 Input e form */
-input, textarea {
-    width: 100%;
-    font-size: 16px;
-    padding: 12px;
-    margin-bottom: 12px;
-    border: 2px solid #007acc;
-    border-radius: 8px;
-    background: #f9fcff;
-}
-
-/* 🟢 Lista mezzi */
-#mezzi-list {
+    background: #f4f7fa;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* 🟢 Singolo mezzo */
-.mezzo {
-    background-color: white;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    width: 280px;
-    text-align: left;
-    transition: 0.3s ease-in-out;
+h1, h2 {
+    text-align: center;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    margin-top: 36px;
+    color: #1976d2;
 }
 
-.mezzo:hover {
-    transform: translateY(-5px);
+#gestione-area, #scheda-mezzo {
+    background: #fff;
+    max-width: 400px;
+    width: 90vw;
+    margin: 30px auto 0 auto;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 24px 28px 32px 28px;
 }
 
-/* 🟢 Stile immagini */
-.foto-mezzo img {
-    width: 100%;
-    border-radius: 10px;
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+form label {
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 4px;
     margin-top: 10px;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* 🟢 Layout responsive */
-@media (max-width: 768px) {
-    .container {
-        width: 90%;
-        padding: 15px;
-    }
+form input[type="text"],
+form input[type="number"],
+form input[type="password"],
+form input[type="file"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #d1e0ef;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    background: #f7fafc;
+    transition: border 0.2s;
+}
 
-    button, .btn {
-        width: 100%;
-    }
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form input[type="password"]:focus,
+form textarea:focus {
+    border-color: #1976d2;
+    outline: none;
+}
 
-    #mezzi-list {
-        flex-direction: column;
-        align-items: center;
-    }
+form button[type="submit"], .btn, #password-btn {
+    background: #1976d2;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 7px;
+    font-size: 1.1em;
+    margin-top: 16px;
+    cursor: pointer;
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 2px 8px rgba(25,118,210,0.10);
+}
 
-    .mezzo {
-        width: 90%;
+form button[type="submit"]:hover, .btn:hover, #password-btn:hover {
+    background: #1256a1;
+}
+
+#codice-generato,
+#codice-mezzo {
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(92deg, #1976d2 80%, #4fc3f7 100%);
+    padding: 14px;
+    border-radius: 7px;
+    font-size: 1.3em;
+    margin-bottom: 22px;
+    margin-top: 22px;
+    letter-spacing: 2px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(25,118,210,0.10);
+}
+
+input[type="file"] {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+
+a.btn {
+    display: inline-block;
+    margin: 30px auto 0 auto;
+    padding: 10px 24px;
+    text-decoration: none;
+}
+
+@media (max-width: 500px) {
+    #gestione-area, #scheda-mezzo {
+        max-width: 98vw;
+        padding: 10px 6vw 18px 6vw;
     }
 }
