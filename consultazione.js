@@ -1,18 +1,54 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scheda Mezzo</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="firebase.js"></script>
-    <script type="module" src="consultazione.js"></script>
-</head>
-<body>
-    <div id="codice-mezzo" style="font-weight:bold; color:#fff; background:#1976d2; padding:14px; border-radius:7px; font-size:1.4em; margin-bottom:25px; letter-spacing:2px; text-align:center;"></div>
-    <div id="scheda-mezzo">
-        <!-- Dettagli del mezzo verranno inseriti qui da consultazione.js -->
-    </div>
-    <a href="index.html" class="btn">Torna Indietro</a>
-</body>
-</html>
+import { db, doc, getDoc } from "./firebase.js";
+
+function getMezzoIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
+
+function mostraCodiceMezzo(codice) {
+    const codiceDiv = document.getElementById("codice-mezzo");
+    codiceDiv.textContent = codice || "Codice mezzo non disponibile";
+    codiceDiv.style.display = "block";
+}
+
+async function mostraSchedaMezzo() {
+    const mezzoId = getMezzoIdFromUrl();
+    const schedaDiv = document.getElementById("scheda-mezzo");
+
+    if (!mezzoId) {
+        mostraCodiceMezzo("");
+        schedaDiv.innerHTML = "<div style='text-align:center;color:#d32f2f;font-weight:bold;'>ID mezzo non specificato nell'URL.<br>Devi aprire la pagina come <code>consultazione.html?id=IDMEZZO</code></div>";
+        return;
+    }
+
+    try {
+        const docRef = doc(db, "mezzi", mezzoId);
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) {
+            mostraCodiceMezzo("");
+            schedaDiv.innerHTML = "<div style='text-align:center;color:#d32f2f;font-weight:bold;'>Mezzo non trovato!</div>";
+            return;
+        }
+
+        const mezzo = docSnap.data();
+
+        mostraCodiceMezzo(mezzo.codice_fb);
+
+        schedaDiv.innerHTML = `
+            <h2 style="text-align:center;margin-bottom:18px;">${mezzo.nome_mezzo || ""}</h2>
+            <p><strong>Anno prima immatricolazione:</strong> ${mezzo.anno_prima_immatricolazione || ""}</p>
+            <p><strong>Attrezzatura:</strong> ${mezzo.attrezzatura || ""}</p>
+            <p><strong>Anno attrezzatura:</strong> ${mezzo.anno_attrezzatura || ""}</p>
+            <p><strong>KM percorsi:</strong> ${mezzo.km_percorsi || ""}</p>
+            <p><strong>Note:</strong> ${mezzo.note_varie || ""}</p>
+            <p><strong>Prezzo:</strong> €${mezzo.prezzo ? mezzo.prezzo.toLocaleString('it-IT') : ""}</p>
+            ${mezzo.foto && mezzo.foto.length > 0 ? mezzo.foto.map(url => `<img src="${url}" style="max-width:100%;margin:18px 0;border-radius:7px;box-shadow:0 2px 8px #0001;">`).join("") : ""}
+        `;
+    } catch (err) {
+        mostraCodiceMezzo("");
+        schedaDiv.innerHTML = "<div style='text-align:center;color:#d32f2f;font-weight:bold;'>Errore durante il caricamento dei dati.<br/>" + err.message + "</div>";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", mostraSchedaMezzo);
