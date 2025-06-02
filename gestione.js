@@ -22,19 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mezzoForm.addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            const fileInput = document.getElementById("foto_mezzo");
-            const files = fileInput.files;
-            let imageUrls = [];
-
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const storageRef = ref(storage, `mezzi/${Date.now()}_${file.name}`);
-                await uploadBytes(storageRef, file);
-                const url = await getDownloadURL(storageRef);
-                imageUrls.push(url);
-            }
-
-            // 1. Ottieni tutti i codici esistenti
+            // 1. Ottieni tutti i codici esistenti per generare il nuovo codice
             const mezziSnapshot = await getDocs(collection(db, "mezzi"));
             let maxNumero = 0;
             mezziSnapshot.forEach(docSnap => {
@@ -54,16 +42,29 @@ document.addEventListener("DOMContentLoaded", () => {
             const nuovoCodiceNumero = maxNumero + 1;
             const nuovoCodiceFB = `FB.${String(nuovoCodiceNumero).padStart(5, "0")}`;
 
-            // 3. Crea oggetto mezzo
+            // 3. Carica le foto (se presenti) su Firebase Storage nella cartella del mezzo
+            const fileInput = document.getElementById("foto_mezzo");
+            const files = fileInput.files;
+            let imageUrls = [];
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const storageRef = ref(storage, `mezzi/${nuovoCodiceFB}/foto_${i + 1}_${file.name}`);
+                await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(storageRef);
+                imageUrls.push(url);
+            }
+
+            // 4. Crea oggetto mezzo
             const nuovoMezzo = {
                 codice_fb: nuovoCodiceFB,
                 nome_mezzo: document.getElementById("nome_mezzo").value,
-                anno_prima_immatricolazione: parseInt(document.getElementById("anno_prima_immatricolazione").value),
+                anno_prima_immatricolazione: parseInt(document.getElementById("anno_prima_immatricolazione").value) || null,
                 attrezzatura: document.getElementById("attrezzatura").value,
                 anno_attrezzatura: document.getElementById("anno_attrezzatura").value ? parseInt(document.getElementById("anno_attrezzatura").value) : null,
+                targa: document.getElementById("targa") ? document.getElementById("targa").value : "",
                 km_percorsi: document.getElementById("km_percorsi").value ? parseInt(document.getElementById("km_percorsi").value) : null,
                 note_varie: document.getElementById("note_varie").value,
-                prezzo: parseFloat(document.getElementById("prezzo").value),
+                prezzo: document.getElementById("prezzo").value ? parseFloat(document.getElementById("prezzo").value) : null,
                 foto: imageUrls
             };
 
@@ -114,11 +115,4 @@ document.addEventListener("DOMContentLoaded", () => {
                 await deleteDoc(doc(db, "mezzi", docId));
                 eliminaResult.textContent = "Mezzo eliminato con successo!";
                 eliminaResult.style.color = "#43a047";
-                eliminaForm.reset();
-            } catch (err) {
-                eliminaResult.textContent = "Errore durante l'eliminazione: " + err.message;
-                eliminaResult.style.color = "#e53935";
-            }
-        });
-    }
-});
+                eliminaForm.reset
