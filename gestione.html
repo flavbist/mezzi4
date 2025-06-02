@@ -9,10 +9,42 @@
     <script type="module" src="gestione.js"></script>
 </head>
 <body>
-  <div class="container">
     <h1>Gestione Mezzi</h1>
-    <!-- Qui puoi inserire il form/modulo per aggiungere o modificare mezzi -->
+    <label for="password">Inserisci password:</label>
+    <input type="password" id="password">
+    <button id="password-btn" onclick="checkPassword()">Accedi</button>
+
+    <div id="gestione-area" style="display: none;">
+        <h2>Aggiungi nuovo mezzo</h2>
+        <form id="mezzo-form">
+            <label for="nome_mezzo">Nome Mezzo:</label>
+            <input type="text" id="nome_mezzo" placeholder="Es. Fiat Ducato" required>
+
+            <label for="anno_prima_immatricolazione">Anno Prima Immatricolazione:</label>
+            <input type="number" id="anno_prima_immatricolazione" placeholder="Es. 2015" required>
+
+            <label for="attrezzatura">Attrezzatura:</label>
+            <input type="text" id="attrezzatura" placeholder="Es. Cassone Ribaltabile">
+
+            <label for="anno_attrezzatura">Anno Attrezzatura:</label>
+            <input type="number" id="anno_attrezzatura" placeholder="Es. 2020">
+
+            <label for="km_percorsi">KM Percorsi:</label>
+            <input type="number" id="km_percorsi" placeholder="Es. 120000">
+
+            <label for="note_varie">Note:</label>
+            <textarea id="note_varie" placeholder="Eventuali dettagli"></textarea>
+
+            <label for="prezzo">Prezzo (€):</label>
+            <input type="number" id="prezzo" placeholder="Es. 25000" required>
+
+            <label for="foto_mezzo">Foto del Mezzo:</label>
+            <input type="file" id="foto_mezzo" multiple accept="image/*">
+
+            <button type="submit">Aggiungi Mezzo</button>
+        </form>
+        <div id="codice-generato" style="margin-top: 20px; font-weight: bold; color: #fff; background: #1976d2; padding: 12px; border-radius: 6px; font-size: 1.3em; letter-spacing: 2px; text-align: center;"></div>
+    </div>
     <a href="index.html" class="btn">Torna Indietro</a>
-  </div>
 </body>
 </html>
