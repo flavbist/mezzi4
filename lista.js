@@ -51,8 +51,7 @@ function renderMezzi(lista) {
               ${mezzo.anno_attrezzatura ? `<div><strong>Anno attrezzatura:</strong> ${mezzo.anno_attrezzatura}</div>` : ""}
               ${mezzo.km_percorsi ? `<div><strong>Km percorsi:</strong> ${mezzo.km_percorsi}</div>` : ""}
               ${mezzo.note_varie ? `<div><strong>Note:</strong> ${mezzo.note_varie}</div>` : ""}
-              ${mezzo.prezzo ? `<div><strong>Prezzo:</strong> €${mezzo.prezzo.toLocaleString('it-IT')}</div>` : ""
-              ${mezzo.foto ? `<div><strong>Foto:</strong> €${mezzo.foto.toLocaleString('it-IT')}</div>` : ""}
+              ${mezzo.prezzo ? `<div><strong>Prezzo:</strong> €${mezzo.prezzo.toLocaleString('it-IT')}</div>` : ""}
               <div style="margin-top:8px;">
                 <a class="btn" href="consultazione.html?id=${mezzo._id}" style="padding:5px 12px;font-size:0.95em;">Apri</a>
               </div>
