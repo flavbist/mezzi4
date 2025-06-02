@@ -6,7 +6,7 @@ const storage = getStorage();
 // Funzione GLOBALE per la password (necessario con type="module")
 window.checkPassword = function () {
     const passwordInput = document.getElementById("password").value.trim();
-    if (passwordInput === "171073") {
+    if (passwordInput === "1710") {
         document.getElementById("gestione-area").style.display = "block";
         document.getElementById("login-area").style.display = "none";
     } else {
