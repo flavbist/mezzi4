@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         await addDoc(collection(db, "mezzi"), nuovoMezzo);
 
-        // Mostra il codice generato nella pagina
+        // Mostra il codice generato nella pagina, evidenziato
         document.getElementById("codice-generato").textContent = "Codice mezzo generato: " + nuovoCodiceFB;
 
         document.getElementById("mezzo-form").reset();
