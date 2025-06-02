@@ -69,7 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         await addDoc(collection(db, "mezzi"), nuovoMezzo);
-        alert("✅ Mezzo aggiunto con successo! Codice: " + nuovoCodiceFB);
+
+        // Mostra il codice generato nella pagina
+        document.getElementById("codice-generato").textContent = "Codice mezzo generato: " + nuovoCodiceFB;
+
         document.getElementById("mezzo-form").reset();
     });
 });
