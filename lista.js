@@ -18,6 +18,12 @@ async function caricaMezzi() {
                     <th>Codice</th>
                     <th>Nome</th>
                     <th>Anno</th>
+                    <th>Targa</th>
+                    <th>Attrezzatura</th>
+                    <th>Anno Attrezzatura</th>
+                    <th>KM</th>
+                    <th>Note</th>
+                    <th>Prezzo</th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,6 +36,12 @@ async function caricaMezzi() {
                 <td>${mezzo.codice_fb || ''}</td>
                 <td>${mezzo.nome_mezzo || ''}</td>
                 <td>${mezzo.anno_prima_immatricolazione || ''}</td>
+                <td>${mezzo.targa || ''}</td>
+                <td>${mezzo.attrezzatura || ''}</td>
+                <td>${mezzo.anno_attrezzatura || ''}</td>
+                <td>${mezzo.km_percorsi || ''}</td>
+                <td>${mezzo.note_varie || ''}</td>
+                <td>${mezzo.prezzo ? '€' + mezzo.prezzo.toLocaleString('it-IT') : ''}</td>
                 <td>
                   <a class="btn" href="consultazione.html?id=${docSnap.id}" style="padding:5px 12px;font-size:0.95em;">Apri</a>
                 </td>
