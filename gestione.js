@@ -53,4 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 2. Calcola il nuovo codice incrementale
             const nuovoCodiceNumero = maxNumero + 1;
-            const nuovoCodiceFB = `
+            const nuovoCodiceFB = `FB.${String(nuovoCodiceNumero).padStart(5, "0")}`;
+
+            // 3. Crea oggetto mezzo
+            const nuovoMezzo = {
+                codice_fb: nuovoCodiceFB,
+                nome_mezzo: document.getElementById("nome_mezzo").value,
+                anno_prima_immatricolazione: parseInt(document.getElementById("anno_prima_immatricolazione").value),
+                attrezzatura: document.getElementById("attrezzatura").value,
+                anno_attrezzatura: document.getElementById("anno_attrezzatura").value ? parseInt
