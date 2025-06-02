@@ -9,12 +9,31 @@
     <script type="module" src="lista.js"></script>
 </head>
 <body>
-   <input type="text" id="filtro-mezzi" placeholder="Cerca per nome, targa, codice..." style="margin-bottom: 16px; width: 250px;">
+  
 </div>
   <div class="container">
        <!-- Inserisci questo codice in cima al tuo file HTML (subito dopo <body>) -->
 <div style="width:100%; text-align:center; margin-top:8px; margin-bottom:8px;">
   <img src="logo.png" alt="Logo FEBYS CONSULENZE" style="max-width:300px; width:100%; height:auto;">
+  <div style="display: flex; justify-content: center; margin: 24px 0;">
+  <input
+    type="text"
+    id="filtro-mezzi"
+    placeholder="Cerca per nome, targa, codice..."
+    style="
+      width: 270px;
+      padding: 10px 14px;
+      border: 1.5px solid #1976d2;
+      border-radius: 24px;
+      font-size: 1.08em;
+      outline: none;
+      box-shadow: 0 1px 4px rgba(25, 118, 210, 0.04);
+      transition: border-color 0.2s;
+    "
+    onfocus="this.style.borderColor='#1565c0'"
+    onblur="this.style.borderColor='#1976d2'"
+  >
+</div>
     <h1>Elenco Mezzi</h1>
      
 </div>
