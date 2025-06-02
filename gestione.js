@@ -3,7 +3,10 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 const storage = getStorage();
 
-// Funzione GLOBALE per la password (necessario con type="module")
+/**
+ * Funzione globale per la password (necessario con type="module")
+ * DEVE essere assegnata così per funzionare con onclick="checkPassword()" nell'HTML!
+ */
 window.checkPassword = function () {
     const passwordInput = document.getElementById("password").value.trim();
     if (passwordInput === "1710") {
@@ -14,15 +17,15 @@ window.checkPassword = function () {
     }
 };
 
-// Gestione inserimento nuovo mezzo
 document.addEventListener("DOMContentLoaded", () => {
-    // Inserisci mezzo
+
+    // GESTIONE INSERIMENTO NUOVO MEZZO
     const mezzoForm = document.getElementById("mezzo-form");
     if (mezzoForm) {
         mezzoForm.addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            // 1. Ottieni tutti i codici esistenti per generare il nuovo codice
+            // 1. Trova codice FB progressivo
             const mezziSnapshot = await getDocs(collection(db, "mezzi"));
             let maxNumero = 0;
             mezziSnapshot.forEach(docSnap => {
@@ -37,12 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             });
-
-            // 2. Calcola il nuovo codice incrementale
             const nuovoCodiceNumero = maxNumero + 1;
             const nuovoCodiceFB = `FB.${String(nuovoCodiceNumero).padStart(5, "0")}`;
 
-            // 3. Carica le foto (se presenti) su Firebase Storage nella cartella del mezzo
+            // 2. Carica foto (se presenti) su Firebase Storage nella cartella del mezzo
             const fileInput = document.getElementById("foto_mezzo");
             const files = fileInput.files;
             let imageUrls = [];
@@ -54,11 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 imageUrls.push(url);
             }
 
-            // 4. Crea oggetto mezzo
+            // 3. Prepara dati del mezzo
             const nuovoMezzo = {
                 codice_fb: nuovoCodiceFB,
                 nome_mezzo: document.getElementById("nome_mezzo").value,
-                anno_prima_immatricolazione: parseInt(document.getElementById("anno_prima_immatricolazione").value) || null,
+                anno_prima_immatricolazione: document.getElementById("anno_prima_immatricolazione").value ? parseInt(document.getElementById("anno_prima_immatricolazione").value) : null,
                 attrezzatura: document.getElementById("attrezzatura").value,
                 anno_attrezzatura: document.getElementById("anno_attrezzatura").value ? parseInt(document.getElementById("anno_attrezzatura").value) : null,
                 targa: document.getElementById("targa") ? document.getElementById("targa").value : "",
@@ -68,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 foto: imageUrls
             };
 
+            // 4. Salva su Firestore
             await addDoc(collection(db, "mezzi"), nuovoMezzo);
 
             document.getElementById("codice-generato").textContent = "Codice mezzo generato: " + nuovoCodiceFB;
@@ -75,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Gestione eliminazione mezzo
+    // GESTIONE ELIMINAZIONE MEZZO
     const eliminaForm = document.getElementById("elimina-form");
     const eliminaResult = document.getElementById("elimina-result");
     if (eliminaForm) {
@@ -115,4 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 await deleteDoc(doc(db, "mezzi", docId));
                 eliminaResult.textContent = "Mezzo eliminato con successo!";
                 eliminaResult.style.color = "#43a047";
-                eliminaForm.reset
+                eliminaForm.reset();
+            } catch (err) {
+                eliminaResult.textContent = "Errore durante l'eliminazione: " + err.message;
+                eliminaResult.style.color = "#e53935";
+            }
+        });
+    }
+});
