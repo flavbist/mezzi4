@@ -18,8 +18,8 @@ async function caricaMezzi() {
                     <th>Codice</th>
                     <th>Nome</th>
                     <th>Anno</th>
-                    <th>Attrezzatura</th>
-                    <th>KM Percorsi</th>
+                    <th>Attr.</th>
+                    <th>KM</th>
                     <th>Prezzo</th>
                     <th></th>
                 </tr>
