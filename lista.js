@@ -19,7 +19,6 @@ async function caricaMezzi() {
                     <th>Nome</th>
                     <th>Anno</th>
                     <th>Attr.</th>
-                    <th>KM</th>
                     <th>Prezzo</th>
                     <th></th>
                 </tr>
