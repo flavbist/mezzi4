@@ -31,42 +31,37 @@ async function caricaMezzi() {
 }
 
 // Funzione per mostrare i mezzi (può essere filtrata)
-unction renderMezzi(lista) {
+function renderMezzi(lista) {
     if (!lista.length) {
         listaDiv.innerHTML = "<div style='color:#d32f2f;text-align:center;'>Nessun mezzo trovato.</div>";
         return;
     }
     let html = "<ul style='list-style:none;padding:0;'>";
     lista.forEach(mezzo => {
-        // Mostra la prima foto se presente
-        let fotoHtml = "";
-        if (mezzo.foto && mezzo.foto.length > 0) {
-            fotoHtml = `<img src="${mezzo.foto[0]}" alt="Foto mezzo" style="height:70px; border-radius:7px; margin-right:14px; object-fit:cover; vertical-align:middle;">`;
-        }
         html += `
-        <li style="margin-bottom:24px; padding:14px 8px; border-bottom:1px solid #e0e0e0; display:flex; align-items:flex-start;">
-            ${fotoHtml}
+        <li style="margin-bottom:24px; padding:14px 8px; border-bottom:1px solid #e0e0e0;">
+            <div style="font-weight:bold; font-size:1.2em; color:#1976d2;">
+              ${mezzo.codice_fb || "(senza codice)"}
+            </div>
             <div>
-                <div style="font-weight:bold; font-size:1.2em; color:#1976d2;">
-                  ${mezzo.codice_fb || "(senza codice)"}
-                </div>
-                ${mezzo.nome_mezzo ? `<div><strong>Nome:</strong> ${mezzo.nome_mezzo}</div>` : ""}
-                ${mezzo.anno_prima_immatricolazione ? `<div><strong>Anno immatricolazione:</strong> ${mezzo.anno_prima_immatricolazione}</div>` : ""}
-                ${mezzo.targa ? `<div><strong>Targa:</strong> ${mezzo.targa}</div>` : ""}
-                ${mezzo.attrezzatura ? `<div><strong>Attrezzatura:</strong> ${mezzo.attrezzatura}</div>` : ""}
-                ${mezzo.anno_attrezzatura ? `<div><strong>Anno attrezzatura:</strong> ${mezzo.anno_attrezzatura}</div>` : ""}
-                ${mezzo.km_percorsi ? `<div><strong>Km percorsi:</strong> ${mezzo.km_percorsi}</div>` : ""}
-                ${mezzo.note_varie ? `<div><strong>Note:</strong> ${mezzo.note_varie}</div>` : ""}
-                ${mezzo.prezzo ? `<div><strong>Prezzo:</strong> €${mezzo.prezzo.toLocaleString('it-IT')}</div>` : ""}
-                <div style="margin-top:8px;">
-                  <a class="btn" href="consultazione.html?id=${mezzo._id}" style="padding:5px 12px;font-size:0.95em;">Apri</a>
-                </div>
+              ${mezzo.nome_mezzo ? `<div><strong>Nome:</strong> ${mezzo.nome_mezzo}</div>` : ""}
+              ${mezzo.anno_prima_immatricolazione ? `<div><strong>Anno immatricolazione:</strong> ${mezzo.anno_prima_immatricolazione}</div>` : ""}
+              ${mezzo.targa ? `<div><strong>Targa:</strong> ${mezzo.targa}</div>` : ""}
+              ${mezzo.attrezzatura ? `<div><strong>Attrezzatura:</strong> ${mezzo.attrezzatura}</div>` : ""}
+              ${mezzo.anno_attrezzatura ? `<div><strong>Anno attrezzatura:</strong> ${mezzo.anno_attrezzatura}</div>` : ""}
+              ${mezzo.km_percorsi ? `<div><strong>Km percorsi:</strong> ${mezzo.km_percorsi}</div>` : ""}
+              ${mezzo.note_varie ? `<div><strong>Note:</strong> ${mezzo.note_varie}</div>` : ""}
+              ${mezzo.prezzo ? `<div><strong>Prezzo:</strong> €${mezzo.prezzo.toLocaleString('it-IT')}</div>` : ""}
+              <div style="margin-top:8px;">
+                <a class="btn" href="consultazione.html?id=${mezzo._id}" style="padding:5px 12px;font-size:0.95em;">Apri</a>
+              </div>
             </div>
         </li>
         `;
     });
     html += "</ul>";
     listaDiv.innerHTML = html;
+}
 
 // Gestione filtro live
 if (filtroInput) {
